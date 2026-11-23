@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rainen Morriss | Supply Chain &amp; Business Analytics</title>
+<meta name="description" content="Rainen Morriss: Supply Chain Management student at BYU–Idaho with a Business Analytics minor. Builds Excel, VBA, Power BI, and web tools that turn operations data into planning and tracking interfaces.">
+<meta property="og:title" content="Rainen Morriss | Supply Chain &amp; Business Analytics">
+<meta property="og:description" content="Builds Excel, VBA, Power BI, and web tools that turn operations data into planning and tracking interfaces.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E1A24">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E1A24'/%3E%3Crect x='14' y='34' width='8' height='16' rx='2' fill='%2337B39A'/%3E%3Crect x='28' y='24' width='8' height='26' rx='2' fill='%2337B39A'/%3E%3Crect x='42' y='14' width='8' height='36' rx='2' fill='%2337B39A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F8F6;
+    --surface: #FFFFFF;
+    --ink: #0E1A24;
+    --ink-2: #3D4A55;
+    --ink-3: #6B7782;
+    --line: #E2E6E3;
+    --accent: #0F7A66;
+    --accent-ink: #0B5E4F;
+    --accent-soft: #E3F2EE;
+    --hero-bg: #0E1A24;
+    --hero-ink: #F2F5F3;
+    --hero-ink-2: #A9B6BF;
+    --hero-accent: #37B39A;
+    --radius: 10px;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+    --max: 1040px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0B141C;
+      --surface: #111D27;
+      --ink: #E8EDEA;
+      --ink-2: #B4C0C8;
+      --ink-3: #8593A0;
+      --line: #1F2E3A;
+      --accent: #37B39A;
+      --accent-ink: #5FCDB5;
+      --accent-soft: #12302B;
+      --hero-bg: #08111A;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--hero-accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; z-index: 100; }
+  .skip:focus { left: 8px; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--hero-bg) 92%, transparent);
+    backdrop-filter: saturate(140%) blur(10px);
+    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--hero-ink); text-decoration: none; font-weight: 600; letter-spacing: -.01em; }
+  .brand svg { width: 26px; height: 26px; }
+  .nav ul { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { color: var(--hero-ink-2); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+  .nav ul a:hover { color: var(--hero-ink); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: var(--hero-bg);
+    color: var(--hero-ink);
+    padding: 88px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 13px; letter-spacing: .04em;
+    color: var(--hero-accent); margin: 0 0 18px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--hero-accent); box-shadow: 0 0 0 4px rgba(55,179,154,.18); }
+  .hero h1 {
+    font-size: clamp(40px, 6.4vw, 68px);
+    line-height: 1.03; letter-spacing: -.03em; font-weight: 700;
+    margin: 0 0 20px;
+  }
+  .hero .role { font-size: clamp(18px, 2.2vw, 22px); color: var(--hero-ink); font-weight: 500; margin: 0 0 14px; letter-spacing: -.01em; }
+  .hero .lede { max-width: 640px; color: var(--hero-ink-2); font-size: 17px; margin: 0 0 32px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 64px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 8px;
+    font: 500 15px/1 var(--sans); text-decoration: none;
+    border: 1px solid transparent; transition: background .15s, border-color .15s, color .15s;
+  }
+  .btn svg { width: 16px; height: 16px; }
+  .btn-primary { background: var(--hero-accent); color: #06231D; }
+  .btn-primary:hover { background: #4CC7AE; }
+  .btn-ghost { color: var(--hero-ink); border-color: rgba(255,255,255,.18); }
+  .btn-ghost:hover { border-color: rgba(255,255,255,.4); background: rgba(255,255,255,.04); }
+
+  /* ---------- KPI strip ---------- */
+  .kpis {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .kpi { padding: 28px 24px 32px 0; }
+  .kpi + .kpi { padding-left: 24px; border-left: 1px solid rgba(255,255,255,.1); }
+  .kpi .num { font-family: var(--mono); font-weight: 500; font-size: clamp(28px, 3.4vw, 38px); letter-spacing: -.02em; color: var(--hero-ink); line-height: 1.1; }
+  .kpi .num em { font-style: normal; color: var(--hero-accent); }
+  .kpi .lbl { font-size: 13.5px; color: var(--hero-ink-2); margin-top: 8px; line-height: 1.45; }
+
+  /* ---------- Sections ---------- */
+  section.block { padding: 88px 0 0; }
+  section.block:last-of-type { padding-bottom: 96px; }
+  .sec-head { display: grid; grid-template-columns: 220px 1fr; gap: 40px; margin-bottom: 36px; align-items: baseline; }
+  .sec-num { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: .04em; }
+  .sec-head h2 { font-size: 30px; letter-spacing: -.02em; margin: 0; line-height: 1.15; font-weight: 700; }
+  .sec-body { display: grid; grid-template-columns: 220px 1fr; gap: 40px; }
+  .sec-body > .side { color: var(--ink-3); font-size: 14px; }
+
+  /* ---------- Experience ---------- */
+  .jobs { list-style: none; margin: 0; padding: 0; }
+  .job { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 28px 0; border-top: 1px solid var(--line); }
+  .job:last-child { border-bottom: 1px solid var(--line); }
+  .job .when { font-family: var(--mono); font-size: 13px; color: var(--ink-3); padding-top: 3px; }
+  .job .when .loc { display: block; font-family: var(--sans); margin-top: 4px; }
+  .job h3 { margin: 0; font-size: 19px; letter-spacing: -.01em; font-weight: 600; }
+  .job .org { color: var(--ink-2); font-weight: 500; margin: 2px 0 12px; }
+  .job ul { margin: 0; padding-left: 0; list-style: none; }
+  .job li { position: relative; padding-left: 20px; color: var(--ink-2); margin: 6px 0; }
+  .job li::before { content: ""; position: absolute; left: 2px; top: .7em; width: 8px; height: 2px; background: var(--accent); }
+  .job li strong { color: var(--ink); font-weight: 600; }
+  .badge {
+    display: inline-block; font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+    color: var(--accent-ink); background: var(--accent-soft);
+    padding: 2px 8px; border-radius: 999px; margin-left: 8px; vertical-align: 3px; letter-spacing: .02em;
+  }
+
+  /* ---------- Projects ---------- */
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; display: flex; flex-direction: column;
+    transition: border-color .15s, transform .15s;
+  }
+  .card:hover { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); transform: translateY(-2px); }
+  .card .ctx { font-family: var(--mono); font-size: 12px; color: var(--ink-3); letter-spacing: .02em; margin-bottom: 10px; }
+  .card h3 { font-size: 17.5px; margin: 0 0 8px; letter-spacing: -.01em; font-weight: 600; }
+  .card p { margin: 0 0 18px; color: var(--ink-2); font-size: 15px; flex: 1; }
+  .card .result { font-size: 14px; color: var(--ink); border-left: 2px solid var(--accent); padding-left: 10px; margin: -6px 0 18px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .tags li { font-family: var(--mono); font-size: 12px; color: var(--ink-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
+
+  /* ---------- Skills ---------- */
+  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .skill-group { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; }
+  .skill-group h3 { font-family: var(--mono); font-size: 12.5px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--accent-ink); margin: 0 0 14px; }
+  .skill-group ul { list-style: none; margin: 0; padding: 0; }
+  .skill-group li { padding: 7px 0; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 15px; }
+  .skill-group li:first-child { border-top: 0; padding-top: 0; }
+
+  /* ---------- Education ---------- */
+  .edu { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  .edu .card { padding: 28px; }
+  .edu .card:hover { transform: none; }
+  .edu h3 { font-size: 19px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .fact .v { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--ink); letter-spacing: -.01em; }
+  .fact .k { font-size: 13px; color: var(--ink-3); }
+  .interests { color: var(--ink-2); max-width: 720px; margin: 0; }
+
+  /* ---------- Contact / footer ---------- */
+  .contact {
+    background: var(--hero-bg); color: var(--hero-ink);
+    border-radius: 14px; padding: 48px; margin-top: 88px;
+    display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+  }
+  .contact h2 { margin: 0 0 8px; font-size: 28px; letter-spacing: -.02em; }
+  .contact p { margin: 0; color: var(--hero-ink-2); }
+  .contact .cta { margin: 0; }
+  footer { padding: 32px 0 40px; color: var(--ink-3); font-size: 13.5px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  /* ---------- Reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .card, .btn { transition: none; }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px) {
+    .sec-head, .sec-body, .job { grid-template-columns: 1fr; gap: 8px; }
+    .sec-head { margin-bottom: 24px; }
+    .skills { grid-template-columns: 1fr; }
+    .edu { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .kpi:nth-child(3) { padding-left: 0; border-left: 0; }
+    .kpi:nth-child(n+3) { border-top: 1px solid rgba(255,255,255,.1); }
+    .contact { grid-template-columns: 1fr; padding: 32px; }
+  }
+  @media (max-width: 640px) {
+    .nav ul { display: none; }
+    .grid { grid-template-columns: 1fr; }
+    .hero { padding-top: 56px; }
+    section.block { padding-top: 64px; }
+    .kpi { padding: 22px 14px 24px 0; }
+    .kpi + .kpi { padding-left: 14px; }
+    .kpi:nth-child(3) { padding-left: 0; }
+  }
+
+  /* ---------- Print ---------- */
+  @media print {
+    .nav, .cta, .contact, .skip { display: none !important; }
+    body { background: #fff; color: #000; font-size: 11pt; }
+    .hero { background: #fff; color: #000; padding: 0; }
+    .hero::before { display: none; }
+    .hero .lede, .kpi .lbl, .kpi .num { color: #000; }
+    .kpis { border-color: #ccc; }
+    .kpi + .kpi { border-color: #ccc; }
+    .reveal { opacity: 1; transform: none; }
+    section.block { padding-top: 24px; break-inside: avoid; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Rainen Morriss, home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1A2A36"/><rect x="14" y="34" width="8" height="16" rx="2" fill="#37B39A"/><rect x="28" y="24" width="8" height="26" rx="2" fill="#37B39A"/><rect x="42" y="14" width="8" height="36" rx="2" fill="#37B39A"/></svg>
+      Rainen Morriss
+    </a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Graduating December 2026 · Open to analytics, operations &amp; supply chain roles</p>
+    <h1>Rainen Morriss</h1>
+    <p class="role">Supply Chain Management · Business Analytics</p>
+    <p class="lede">I build Excel, VBA, Power BI, and web tools that turn operations data into planning and tracking interfaces people actually use, from MRP planners and lead-time calculators to grading systems built for handoff.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="Rainen_Morriss_Resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download resume (PDF)
+      </a>
+      <a class="btn btn-ghost" href="mailto:rainen.morriss@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        Email
+      </a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/rainen-morriss" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+
+    <div class="kpis" role="list" aria-label="Highlights">
+      <div class="kpi" role="listitem"><div class="num"><em>$</em>250K+</div><div class="lbl">Expired hospital inventory found through SKU audits</div></div>
+      <div class="kpi" role="listitem"><div class="num">50<em>%</em></div><div class="lbl">Faster inventory counts with a new Excel tracking method</div></div>
+      <div class="kpi" role="listitem"><div class="num">200<em>+</em></div><div class="lbl">SKUs re-slotted across two hospitals, 10% faster locates</div></div>
+      <div class="kpi" role="listitem"><div class="num">4.0</div><div class="lbl">GPA, Supply Chain Management, BYU–Idaho</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Experience -->
+  <section class="block" id="experience" aria-labelledby="h-exp">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">01 / Experience</span><h2 id="h-exp">Where I've worked</h2></div>
+      <ol class="jobs">
+        <li class="job reveal">
+          <div class="when">Apr 2026 – Present<span class="loc">Rexburg, ID</span></div>
+          <div>
+            <h3>Teaching Assistant, Business Analytics <span class="badge">Current</span></h3>
+            <p class="org">Brigham Young University–Idaho</p>
+            <ul>
+              <li>Built a <strong>VBA grading workbook</strong>, designed for handoff to future TAs, supporting up to <strong>75 students</strong> per semester</li>
+              <li>Debugged student <strong>Power BI (DAX) measures</strong> and wrote a 70-point grading rubric in plain, non-technical language</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job reveal">
+          <div class="when">Aug 2026 – Sep 2026<span class="loc">Rexburg, ID</span></div>
+          <div>
+            <h3>Machine Operator Assistant</h3>
+            <p class="org">UNIQ Supply</p>
+            <ul>
+              <li>Built a <strong>Google Sheets tool</strong> from job history data to calculate standard and lead times by machine, <strong>adopted by the company</strong></li>
+              <li>Helped print over <strong>1 million cups in six weeks</strong>, rotating through press setup, quality inspection, and loading roles</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job reveal">
+          <div class="when">Aug 2025 – Oct 2025<span class="loc">CA · NV · GA</span></div>
+          <div>
+            <h3>Operations Specialist Intern</h3>
+            <p class="org">DAKLAND Solutions</p>
+            <ul>
+              <li>Found over <strong>$250,000 in expired inventory</strong> through hands-on SKU audits at hospital sites</li>
+              <li>Standardized bin locations for <strong>200+ SKUs</strong> across two hospitals, cutting locate time by <strong>10%</strong></li>
+            </ul>
+          </div>
+        </li>
+        <li class="job reveal">
+          <div class="when">Apr 2024 – Jul 2024<span class="loc">Rexburg, ID</span></div>
+          <div>
+            <h3>Chief Operations Officer</h3>
+            <p class="org">Integrated Business Core (Student Business)</p>
+            <ul>
+              <li>Cut inventory counting time <strong>50%</strong> by building a new Excel tracking method</li>
+              <li>Built operations from scratch, improving production time <strong>20%</strong> and cutting waste <strong>5%</strong> in 4 weeks</li>
+              <li>Increased gross margin <strong>10%</strong> by sourcing lower-cost materials and new suppliers</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job reveal">
+          <div class="when">Jan 2023 – Mar 2024<span class="loc">Mountain View, AR</span></div>
+          <div>
+            <h3>CNC Operator</h3>
+            <p class="org">Advanced Integrated Electronics</p>
+            <ul>
+              <li>Machined parts to tolerances as tight as <strong>.002"</strong>, with an <strong>under 1% failure rate</strong> trimming precision electrodes by microscope</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="block" id="projects" aria-labelledby="h-proj">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">02 / Projects</span><h2 id="h-proj">Tools I've built</h2></div>
+      <div class="grid">
+        <article class="card reveal">
+          <div class="ctx">BYU–Idaho coursework</div>
+          <h3>MRP Planning Tools</h3>
+          <p>Dropdown-driven Excel MRP tools that turn a sales forecast and bill of materials into weekly part orders, accounting for lead time, on-hand inventory, lot sizing, and minimum order quantities.</p>
+          <div class="result">Handles BOMs of up to 27 items</div>
+          <ul class="tags"><li>Excel</li><li>MRP</li><li>Inventory planning</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ctx">BYU–Idaho Mail Services</div>
+          <h3>Mail Route Optimization</h3>
+          <p>Identified zero-volume stops through Gemba walks and proposed a hybrid push-pull route, with a Microsoft Forms pickup request triggering on-demand stops.</p>
+          <div class="result">Projected 1 labor hour/day freed at no capital cost</div>
+          <ul class="tags"><li>Process analysis</li><li>Microsoft Forms</li><li>Routing</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ctx">The RexTech · MET 340</div>
+          <h3>Lean Six Sigma Process Improvement</h3>
+          <p>Co-leading a 5-person DMAIC project on shop layout and 5S for a local repair business.</p>
+          <div class="result">Targeting 2 hr → 45 min per device, 3 → 6 units in process</div>
+          <ul class="tags"><li>DMAIC</li><li>5S</li><li>Layout</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ctx">BYU–Idaho coursework</div>
+          <h3>Production Scheduling Optimizer</h3>
+          <p>An Excel Gantt chart and flowchart tool for visualizing production schedules and spotting where sequencing can be improved.</p>
+          <ul class="tags"><li>Excel</li><li>Scheduling</li><li>Visualization</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ctx">Personal project</div>
+          <h3>Room Planner Web App</h3>
+          <p>A browser app for laying out rooms with custom room and furniture dimensions, color-coded categories, and snap-to-grid placement.</p>
+          <ul class="tags"><li>JavaScript</li><li>HTML/CSS</li></ul>
+        </article>
+        <article class="card reveal">
+          <div class="ctx">BYU–Idaho coursework</div>
+          <h3>Stock Screener</h3>
+          <p>An Excel stock screener that pulls live P/E data from the web with a web query and filters companies against set criteria.</p>
+          <ul class="tags"><li>Excel</li><li>Web query</li><li>Financial data</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="block" id="skills" aria-labelledby="h-skills">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">03 / Skills</span><h2 id="h-skills">Toolkit</h2></div>
+      <div class="skills">
+        <div class="skill-group reveal">
+          <h3>Analytics</h3>
+          <ul><li>Excel &amp; VBA</li><li>Power BI (DAX)</li><li>Tableau</li><li>SQL</li><li>Google Sheets</li><li>Microsoft Forms</li></ul>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Programming</h3>
+          <ul><li>Python</li><li>C#</li><li>C++</li><li>HTML &amp; JavaScript</li><li>AI-assisted modeling</li></ul>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Supply Chain</h3>
+          <ul><li>MRP</li><li>Production scheduling</li><li>Inventory control</li><li>Lean Six Sigma (DMAIC)</li><li>Team leadership</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="block" id="education" aria-labelledby="h-edu">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="sec-num">04 / Education</span><h2 id="h-edu">Education &amp; certification</h2></div>
+      <div class="edu">
+        <div class="card reveal">
+          <div class="ctx">Apr 2022 – Dec 2026 · Rexburg, ID</div>
+          <h3>B.S. Supply Chain Management</h3>
+          <p style="margin:0">Brigham Young University–Idaho · Minor in Business Analytics</p>
+          <div class="facts">
+            <div class="fact"><div class="v">4.0</div><div class="k">GPA</div></div>
+            <div class="fact"><div class="v">VP</div><div class="k">Supply-Chain Society</div></div>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="ctx">Expected Dec 2026</div>
+          <h3>Lean Six Sigma Green Belt</h3>
+          <p style="margin:0">Applying DMAIC through a live client project with a local Rexburg business.</p>
+        </div>
+      </div>
+
+      <div class="sec-body reveal" style="margin-top:40px">
+        <div class="side">Outside work</div>
+        <p class="interests">Cooking, fixing engines and electronics, hunting for tech deals, board games, pickup sports, and hiking and camping in the Ozarks.</p>
+      </div>
+
+      <div class="contact reveal" id="contact">
+        <div>
+          <h2>Let's talk.</h2>
+          <p>I'm looking for analytics, operations, planning, and supply chain roles starting after December 2026.</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="mailto:rainen.morriss@gmail.com">rainen.morriss@gmail.com</a>
+          <a class="btn btn-ghost" href="Rainen_Morriss_Resume.pdf" download>Resume PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Rainen Morriss</span>
+    <span><a href="https://www.linkedin.com/in/rainen-morriss" target="_blank" rel="noopener">LinkedIn</a> · <a href="mailto:rainen.morriss@gmail.com">Email</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+</body>
+</html>
